@@ -72,69 +72,27 @@
 		if (97 <= code && code <= 122) {
 			code -= 32;
 		}
-		else if (code === 48 && shift) {  // 0
-			key = ')';
-		}
-		else if (code === 49 && shift) {  // 1
-			key = '!';
-		}
-		else if (code === 50 && shift) {  // 2
-			key = '@';
-		}
-		else if (code === 51 && shift) {  // 3
-			key = '#';
-		}
-		else if (code === 52 && shift) {  // 4
-			key = '$';
-		}
-		else if (code === 53 && shift) {  // 5
-			key = '%';
-		}
-		else if (code === 54 && shift) {  // 6
-			key = '^';
-		}
-		else if (code === 55 && shift) {  // 7
-			key = '&';
-		}
-		else if (code === 56 && shift) {  // 8
-			key = '*';
-		}
-		else if (code === 57 && shift) {  // 9
-			key = '(';
-		}
-		else if (code === 186) {
-			key = (shift ? ':' : ';');
-		}
-		else if (code === 187) {
-			key = (shift ? '+' : '=');
-		}
-		else if (code === 188) {
-			key = (shift ? '<' : ',');
-		}
-		else if (code === 189) {
-			key = (shift ? '_' : '-');
-		}
-		else if (code === 190) {
-			key = (shift ? '>' : '.');
-		}
-		else if (code === 191) {
-			key = (shift ? '?' : '/');
-		}
-		else if (code === 192) {
-			key = (shift ? '~' : '`');
-		}
-		else if (code === 219) {
-			key = (shift ? '{' : '[');
-		}
-		else if (code === 220) {
-			key = (shift ? '|' : '\\');
-		}
-		else if (code === 221) {
-			key = (shift ? '}' : ']');
-		}
-		else if (code === 222) {
-			key = (shift ? '"' : '\'');
-		}
+		else if (code === 48 && shift) { key = ')'; }  // 0
+		else if (code === 49 && shift) { key = '!'; }  // 1
+		else if (code === 50 && shift) { key = '@'; }  // 2
+		else if (code === 51 && shift) { key = '#'; }  // 3
+		else if (code === 52 && shift) { key = '$'; }  // 4
+		else if (code === 53 && shift) { key = '%'; }  // 5
+		else if (code === 54 && shift) { key = '^'; }  // 6
+		else if (code === 55 && shift) { key = '&'; }  // 7
+		else if (code === 56 && shift) { key = '*'; }  // 8
+		else if (code === 57 && shift) { key = '('; }  // 9
+		else if (code === 186) { key = (shift ? ':' : ';'); }
+		else if (code === 187) { key = (shift ? '+' : '='); }
+		else if (code === 188) { key = (shift ? '<' : ','); }
+		else if (code === 189) { key = (shift ? '_' : '-'); }
+		else if (code === 190) { key = (shift ? '>' : '.'); }
+		else if (code === 191) { key = (shift ? '?' : '/'); }
+		else if (code === 192) { key = (shift ? '~' : '`'); }
+		else if (code === 219) { key = (shift ? '{' : '['); }
+		else if (code === 220) { key = (shift ? '|' : '\\'); }
+		else if (code === 221) { key = (shift ? '}' : ']'); }
+		else if (code === 222) { key = (shift ? '"' : '\''); }
 
 		// if (event.type === 'keypress') {
 		// 	key = String.fromCharCode(code);
