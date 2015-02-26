@@ -1,0 +1,17 @@
+.key-table {
+	text-align: center;
+}
+.modifire {
+	color: #ccc;
+}
+.modifire.is-active {
+	color: #000;
+}
+.js-display .js-type {
+	opacity: 0.1;
+	transition: opacity 0.5s;
+}
+.js-display.is-updated .js-type {
+	opacity: 1;
+	transition: opacity 0s;
+}
