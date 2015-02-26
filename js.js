@@ -94,10 +94,6 @@
 		else if (code === 221) { key = (shift ? '}' : ']'); }
 		else if (code === 222) { key = (shift ? '"' : '\''); }
 
-		// if (event.type === 'keypress') {
-		// 	key = String.fromCharCode(code);
-		// }
-
 		if (!key) {
 			if (event.type === 'keypress') {
 				key = String.fromCharCode(code);
@@ -109,8 +105,6 @@
 				key = g_keycodeMap[code] || String.fromCharCode(code);
 			}
 		}
-
-		// key = '(unknown:' + code + ')';
 
 		return key;
 	}
