@@ -34,6 +34,7 @@
 	};
 	function onkey(event) {
 		var type = event.type;
+		var layout = document.querySelector('.js-layout:checked').value;
 		var repeat = event.repeat;
 		var ctrl = event.ctrlKey;
 		var alt = event.altKey;
@@ -41,7 +42,7 @@
 		var shift = event.shiftKey;
 		var code = event.keyCode;
 		var which = event.which;
-		var key = getKey(event);
+		var key = getKey(layout, event);
 		var count = ++g_counts[type];
 
 		var row = document.querySelector('.js-display[data-type=' + type + ']');
@@ -64,32 +65,43 @@
 
 		// console.log(event.type, event);
 	}
-	function getSymbol(code, shift) {
-		var key;
-		if (code === 48 && shift) { key = ')'; }  // 0
-		else if (code === 49 && shift) { key = '!'; }  // 1
-		else if (code === 50 && shift) { key = '@'; }  // 2
-		else if (code === 51 && shift) { key = '#'; }  // 3
-		else if (code === 52 && shift) { key = '$'; }  // 4
-		else if (code === 53 && shift) { key = '%'; }  // 5
-		else if (code === 54 && shift) { key = '^'; }  // 6
-		else if (code === 55 && shift) { key = '&'; }  // 7
-		else if (code === 56 && shift) { key = '*'; }  // 8
-		else if (code === 57 && shift) { key = '('; }  // 9
-		else if (code === 186) { key = (shift ? ':' : ';'); }
-		else if (code === 187) { key = (shift ? '+' : '='); }
-		else if (code === 188) { key = (shift ? '<' : ','); }
-		else if (code === 189) { key = (shift ? '_' : '-'); }
-		else if (code === 190) { key = (shift ? '>' : '.'); }
-		else if (code === 191) { key = (shift ? '?' : '/'); }
-		else if (code === 192) { key = (shift ? '~' : '`'); }
-		else if (code === 219) { key = (shift ? '{' : '['); }
-		else if (code === 220) { key = (shift ? '|' : '\\'); }
-		else if (code === 221) { key = (shift ? '}' : ']'); }
-		else if (code === 222) { key = (shift ? '"' : '\''); }
-		return key;
+	function getSymbol(layout, code, shift) {
+		var getter = symbolGetters[layout]
+		if (getter) {
+			return getter(code, shift);
+		}
+		else {
+			return null;
+		}
 	}
-	function getKey(event) {
+	var symbolGetters = {
+		us: function(code, shift) {
+			var key;
+			if (code === 48 && shift) { key = ')'; }  // 0
+			else if (code === 49 && shift) { key = '!'; }  // 1
+			else if (code === 50 && shift) { key = '@'; }  // 2
+			else if (code === 51 && shift) { key = '#'; }  // 3
+			else if (code === 52 && shift) { key = '$'; }  // 4
+			else if (code === 53 && shift) { key = '%'; }  // 5
+			else if (code === 54 && shift) { key = '^'; }  // 6
+			else if (code === 55 && shift) { key = '&'; }  // 7
+			else if (code === 56 && shift) { key = '*'; }  // 8
+			else if (code === 57 && shift) { key = '('; }  // 9
+			else if (code === 186) { key = (shift ? ':' : ';'); }
+			else if (code === 187) { key = (shift ? '+' : '='); }
+			else if (code === 188) { key = (shift ? '<' : ','); }
+			else if (code === 189) { key = (shift ? '_' : '-'); }
+			else if (code === 190) { key = (shift ? '>' : '.'); }
+			else if (code === 191) { key = (shift ? '?' : '/'); }
+			else if (code === 192) { key = (shift ? '~' : '`'); }
+			else if (code === 219) { key = (shift ? '{' : '['); }
+			else if (code === 220) { key = (shift ? '|' : '\\'); }
+			else if (code === 221) { key = (shift ? '}' : ']'); }
+			else if (code === 222) { key = (shift ? '"' : '\''); }
+			return key;
+		}
+	};
+	function getKey(layout, event) {
 		var key;
 		var code = event.keyCode || event.which;
 		var shift = event.shiftKey;
@@ -98,7 +110,7 @@
 			code -= 32;
 		}
 		else {
-			key = getSymbol(code, shift);
+			key = getSymbol(layout, code, shift);
 		}
 
 		if (!key) {
