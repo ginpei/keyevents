@@ -64,15 +64,9 @@
 
 		// console.log(event.type, event);
 	}
-	function getKey(event) {
+	function getSymbol(code, shift) {
 		var key;
-		var code = event.keyCode || event.which;
-		var shift = event.shiftKey;
-
-		if (97 <= code && code <= 122) {
-			code -= 32;
-		}
-		else if (code === 48 && shift) { key = ')'; }  // 0
+		if (code === 48 && shift) { key = ')'; }  // 0
 		else if (code === 49 && shift) { key = '!'; }  // 1
 		else if (code === 50 && shift) { key = '@'; }  // 2
 		else if (code === 51 && shift) { key = '#'; }  // 3
@@ -93,6 +87,19 @@
 		else if (code === 220) { key = (shift ? '|' : '\\'); }
 		else if (code === 221) { key = (shift ? '}' : ']'); }
 		else if (code === 222) { key = (shift ? '"' : '\''); }
+		return key;
+	}
+	function getKey(event) {
+		var key;
+		var code = event.keyCode || event.which;
+		var shift = event.shiftKey;
+
+		if (97 <= code && code <= 122) {
+			code -= 32;
+		}
+		else {
+			key = getSymbol(code, shift);
+		}
 
 		if (!key) {
 			if (event.type === 'keypress') {
