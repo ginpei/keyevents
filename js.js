@@ -1,4 +1,5 @@
 (function() {
+	var g_elCommand = document.querySelector('.js-command');
 	var g_tmUpdated = { keydown:null, keypress:null, keyup:null };
 	var g_counts = { keydown:0, keypress:0, keyup:0 };
 	var g_keycodeMap = {
@@ -30,7 +31,40 @@
 		120: 'f9',
 		121: 'f10',
 		122: 'f11',
+		123: 'f12'
+	};
+	var g_keycodeMap2 = {
+		8: 'backspace',
+		// 16: 'shift',
+		// 17: 'control',
+		// 18: 'alt',
+		27: 'escape',
+		33: 'pageup',
+		34: 'pagedown',
+		35: 'end',
+		36: 'home',
+		37: 'left',
+		38: 'up',
+		39: 'right',
+		40: 'down',
+		46: 'del',
+		112: 'f1',
+		113: 'f2',
+		114: 'f3',
+		115: 'f4',
+		116: 'f5',
+		117: 'f6',
+		118: 'f7',
+		119: 'f8',
+		120: 'f9',
+		121: 'f10',
+		122: 'f11',
 		123: 'f12',
+	};
+	var g_charcodeMap2 = {
+		9: 'tab',
+		13: 'return',
+		32: 'space',
 	};
 	function onkey(event) {
 		var type = event.type;
@@ -135,7 +169,57 @@
 			el.classList.remove(className);
 		}
 	}
+
+	function onkey2(event) {
+		var command;
+		var asSymbol = false;
+		var type = event.type;
+		var code = event.which;
+
+		if (type === 'keypress') {
+			command = String.fromCharCode(code);
+			if (command.length === 1) {
+				if (/[A-Za-z0-9]/.test(command)) {
+					command = command.toUpperCase();
+				}
+				else if (/\s/.test(command)) {
+					command = g_keycodeMap[code];
+				}
+				else {
+					asSymbol = true;
+				}
+			}
+			else {
+				command = g_charcodeMap2[code];
+			}
+		}
+		else if (type === 'keydown') {
+			command = g_keycodeMap2[code];
+		}
+
+		if (command) {
+			event.preventDefault();
+
+			if (event.ctrlKey) {
+				command = 'C-' + command;
+			}
+			if (!asSymbol && event.shiftKey) {
+				command = 'S-' + command;
+			}
+			if (event.altKey) {
+				command = 'A-' + command;
+			}
+			if (event.metaKey) {
+				command = 'M-' + command;
+			}
+
+			g_elCommand.innerHTML = command;
+		}
+	}
+
 	document.addEventListener('keydown', onkey);
 	document.addEventListener('keypress', onkey);
 	document.addEventListener('keyup', onkey);
+	document.addEventListener('keydown', onkey2);
+	document.addEventListener('keypress', onkey2);
 })();

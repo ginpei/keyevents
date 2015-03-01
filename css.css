@@ -15,3 +15,13 @@
 	opacity: 1;
 	transition: opacity 0s;
 }
+label.is-disabled {
+	color: #999;
+}
+.command {
+	background-color: #eee;
+	font-size: 30px;
+	line-height: 30px;
+	padding: 0.2em;
+	margin: 0.2em;
+}
